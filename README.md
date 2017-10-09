@@ -1,4 +1,4 @@
-[![Geometrize Functional tests logo](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/screenshots/loog.png?raw=true "Geometrize - geometrizing images into geometric primitives functional tests logo")](http://www.geometrize.co.uk/)
+[![Geometrize Functional tests logo](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/screenshots/logo.png?raw=true "Geometrize - geometrizing images into geometric primitives functional tests logo")](http://www.geometrize.co.uk/)
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/LICENSE)
 [![Travis Functional Tests Build Status](https://img.shields.io/travis/Tw1ddle/geometrize-functional-tests.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/geometrize-functional-tests)
@@ -6,7 +6,7 @@
 
 WORK IN PROGRESS
 
-Functional test scripts for [Geometrize](http://www.geometrize.co.uk/), an app for geometrizing images into geometric primitives. Continuous testing is performed via CI platforms to regularly run the test scripts.
+ChaiScript functional test scripts for [Geometrize](http://www.geometrize.co.uk/), an app for geometrizing images into geometric primitives. Continuous testing is performed via CI platforms to run the test scripts.
 
 [![Geometrized Sunset Landscape](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/screenshots/geometrized_sunset_landscape.png?raw=true "Sunset Landscape, 490 Rotated Ellipses")](http://www.geometrize.co.uk/)
 
