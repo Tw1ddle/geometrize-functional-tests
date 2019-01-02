@@ -35,19 +35,19 @@ latest_url_file_name = '__latest'
 urllib.request.urlretrieve(latest_tag_url, latest_url_file_name)
 binary_file_name = open(latest_url_file_name ,"r").read().strip()
 
-print("Latest file is named " + binary_file_name + " - will download to app subfolder")
+print("Latest file is named " + binary_file_name + " - will download to repo root")
 
 latest_binary_url = bucket_url + urllib.parse.quote_plus(breadcrumb + "/" + binary_file_name)
-urllib.request.urlretrieve(latest_binary_url, "app/" + binary_file_name)
+urllib.request.urlretrieve(latest_binary_url, binary_file_name)
 
 print("Finished downloading!")
 
-source_path = script_dir + "/app/" + binary_file_name
-target_path = script_dir + "/app/app_prepared"
+source_path = script_dir + "/" + binary_file_name
+target_path = script_dir + "/app"
 
-# Unpack/install binary to "app_prepared" folder, same place for all platforms for symmetry
+# Unpack/install binary to "app" folder, same place for all platforms for symmetry
 if system_name == "Windows":
-    print("Installing app to /app_prepared folder in unattended mode")
+    print("Installing app to app folder in unattended mode")
     unattended_installer_path = script_dir + "/windows_unattended_install_script.qs"
     subprocess.check_call([source_path, '--script', unattended_installer_path])
 else:

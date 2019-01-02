@@ -19,7 +19,7 @@ Controller.prototype.IntroductionPageCallback = function() {
 
 // Installation Folder -> Next
 Controller.prototype.TargetDirectoryPageCallback = function() {
-    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("InstallerDirPath") + "/app_prepared");
+    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("InstallerDirPath") + "/app");
 
     gui.clickButton(buttons.NextButton);
 }
