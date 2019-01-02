@@ -3,8 +3,12 @@ import platform
 import shutil
 import subprocess
 import urllib
-import urllib.parse
 import urllib.request
+
+try:
+    from urllib.parse import urlparse
+except ImportError:
+     from urlparse import urlparse
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
