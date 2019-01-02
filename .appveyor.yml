@@ -3,7 +3,7 @@ configuration:
 
 environment:
   matrix:
-    - PYTHON: "C:\\Python36-x64"
+    - PYTHON: "C:\\Python36-x64\\python.exe"
   
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
