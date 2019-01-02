@@ -16,4 +16,4 @@ matrix:
 script:
   - python get_geometrize.py
   - python run_tests.py
-  - python report_result.py language: python
+  - python report_result.py
