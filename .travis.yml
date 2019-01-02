@@ -8,10 +8,11 @@ matrix:
     language: python
     python: "3.6"
   - os: osx
+    language: generic
     osx_image: xcode10
 
 # Run the tests, gather results etc
 script:
-  - python get_geometrize.py
-  - python run_tests.py
-  - python report_result.py
+  - python3 get_geometrize.py
+  - python3 run_tests.py
+  - python3 report_result.py
