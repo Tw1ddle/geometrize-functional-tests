@@ -2,11 +2,13 @@ sudo: required
 dist: trusty
 language: python
 
+python:
+  - "3.6"
+
 # Setup build matrix
 matrix:
   include:
   - os: linux
-    python: "3.6"
   - os: osx
     osx_image: xcode10
 
