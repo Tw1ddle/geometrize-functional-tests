@@ -47,7 +47,8 @@ elif system_name == "Darwin":
     app_path = matches[0]
     
     print("Running Mac .app")
-    subprocess.check_call([app_path, tests_option])
+	subprocess.check_call(["/usr/bin/open", "-W", "-n", "-a", app_path, "--args", tests_option])
+
 elif system_name == "Linux":
     print("Making AppImage executable")
     st = os.stat(binary_path)
