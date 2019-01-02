@@ -1,64 +1,34 @@
-import glob
-import os
-from os.path import expanduser
 import platform
-import shutil
-import subprocess
-import time
+import urllib
+import urllib.parse
+import urllib.request
 
 systemName = platform.system()
 
 if systemName != "Windows" and systemName != "Mac" and systemName != "Linux":
-    raise Exception("Unknown operating system, don't know what application version to download")
-	
-if systemName != "Linux":
-	raise Exception("This only works on Linux for now, Windows/Mac would work but need additional setup for app installation, extra browser prompts etc")
-	
-# Browser to use, note we do redirects etc based on client side js so can't just use wget
-browser = 'google-chrome-stable'
-	
-# Folder structure on download page is windows/mac/linux
+    raise Exception("Unknown operating system, don't know what app version to download")
+
+# Folder structure has windows/mac/linux at its base
 breadcrumb = systemName.lower()
 
-# Path to the latest installer/app binary
-breadcrumb_url = 'https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=' + breadcrumb + '%2F'
-latest_download_url = breadcrumb_url + '&dl_latest=true'
+# Default to MSVC builds for Windows
+if breadcrumb == "windows":
+    breadcrumb = "windows/msvc2015_64"
 
-print("Creating browser downloads directory")
+bucket_url = 'https://geometrize-installer-bucket.s3.amazonaws.com/'
 
-homeDir = os.path.expanduser('~')
+# URL for file containing the name of the latest binary, which we ought to download and test with
+latest_tag_url = bucket_url + breadcrumb + "/__latest"
 
-os.makedirs(homeDir + "/Downloads")
+print("Searching for file containing name of build to test with at: " + latest_tag_url)
 
-print("Will download the application through the web browser")
+latest_url_file_name = '__latest'
+urllib.request.urlretrieve(latest_tag_url, latest_url_file_name)
+latest_file_name = open(latest_url_file_name ,"r").read().strip()
 
-subprocess.call([browser, latest_download_url], shell=False)
+print("Latest file is named " + latest_file_name + " - will download to app subfolder")
 
-print("Waiting for 2 minutes for the web browser download the application...")
+latest_binary_url = bucket_url + urllib.parse.quote_plus(breadcrumb + "/" + latest_file_name)
+urllib.request.urlretrieve(latest_binary_url, "app/" + latest_file_name)
 
-time.sleep(120)
-
-print(os.listdir(homeDir))
-
-# Path to the Chrome downloads directory (assuming this is the right place)
-downloadsDir = homeDir + '/Downloads'
-
-# Look for the downloaded Geometrize binary
-downloadedFiles = os.listdir(downloadsDir)
-
-print("Will print downloaded files...")
-
-print(downloadedFiles)
-
-filteredDownloads = glob.glob(downloadsDir + '/geometrize*')
-
-print(filteredDownloads)
-
-if not filteredDownloads:
-    raise Exception("Failed to find the downloaded application binary")
-
-filePath = os.abspath(filteredDownloads[0])
-
-print("Will copy the app to the testing subfolder")
-
-shutil.copy(os.abspath(filePath), os.path.realpath(__file__) + "/app/Geometrize.AppImage")
+print("Finished downloading!")
