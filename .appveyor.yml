@@ -1,9 +1,13 @@
 configuration:
   - release
+
+environment:
+  matrix:
+    - PYTHON: "C:\\Python36-x64"
   
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
   # Run the tests, gather results etc
-  - python get_geometrize.py
-  - python run_tests.py
-  - python report_result.py
+  - %PYTHON% get_geometrize.py
+  - %PYTHON% run_tests.py
+  - %PYTHON% report_result.py
