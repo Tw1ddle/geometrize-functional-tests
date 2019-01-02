@@ -1,0 +1,15 @@
+sudo: required
+language: cpp
+
+# Setup build matrix
+matrix:
+  include:
+  - os: linux
+    addons:
+      firefox: latest
+
+# Run the Geometrize test scripts, gather results etc
+script:
+  - python get_geometrize.py
+  - python run_tests.py
+  - python report_result.py
