@@ -27,11 +27,16 @@ latest_download_url = breadcrumb_url + '&dl_latest=true'
 # Run browser, expect download to happen
 subprocess.call([browser, latest_download_url], shell=False)
 
-# Delays for 2 minutes, should be plenty of time for the browser to download the application
+print("Waiting for a few minutes, should be plenty of time for the browser to download the application...")
+
 time.sleep(120)
 
+homeDir = os.path.expanduser('~')
+
+print(os.listdir(homeDir)))
+
 # Path to the Chrome downloads directory (assuming this is the right place)
-downloadsDir = os.path.expanduser('~') + '/Downloads'
+downloadsDir = homeDir + '/Downloads'
 
 # Look for the downloaded Geometrize binary, copy it to the app subfolder
 downloadedFiles = os.listdir(downloadsDir)
