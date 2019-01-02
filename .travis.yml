@@ -6,7 +6,7 @@ matrix:
   include:
   - os: linux
     addons:
-      firefox: latest
+      chrome: stable
 
 # Run the Geometrize test scripts, gather results etc
 script:
