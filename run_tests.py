@@ -36,7 +36,7 @@ elif system_name == "Darwin":
     # https://bugreports.qt.io/browse/QTBUG-60324 - dmg structure is the
     # current working directory when the build was done... so we must find the .app file
     matches = []
-    for filepath in glob.iglob('Volumes/**/Geometrize.app', recursive=True):
+    for filepath in glob.iglob('/Volumes/**/Geometrize.app', recursive=True):
         matches.append(filepath)
 
     print(matches)
