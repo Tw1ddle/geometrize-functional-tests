@@ -33,7 +33,7 @@ time.sleep(120)
 
 homeDir = os.path.expanduser('~')
 
-print(os.listdir(homeDir)))
+print(os.listdir(homeDir))
 
 # Path to the Chrome downloads directory (assuming this is the right place)
 downloadsDir = homeDir + '/Downloads'
