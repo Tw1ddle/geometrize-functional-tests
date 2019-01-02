@@ -1,3 +1,4 @@
+import glob
 import platform
 import os
 import stat
@@ -29,12 +30,23 @@ if system_name == "Windows":
 elif system_name == "Darwin":
     print("Mounting Mac .dmg")
     subprocess.check_call(["hdiutil", "attach", binary_path])
+
+    print("Finding Mac .app")
+    
+    # https://bugreports.qt.io/browse/QTBUG-60324 - dmg structure is the
+    # current working directory when the build was done... so we must find the .app file
+    var matches = []
+    for filepath in glob.iglob('Volumes/**/Geometrize.app', recursive=True):
+        matches.append(filepath)
+
+    print(matches)
+    if not matches:
+        raise Exception("Failed to find Geometrize.app file")
+    
+    app_path = matches[0]
     
     print("Running Mac .app")
-	# https://bugreports.qt.io/browse/QTBUG-60324 - dmg structure is the
-	# current working directory when the build was done... so we must find the .app file
-	# TODO
-    subprocess.check_call(["/Volumes/Geometrize/Geometrize.app", tests_option])
+    subprocess.check_call([app_path, tests_option])
 elif system_name == "Linux":
     print("Making AppImage executable")
     st = os.stat(binary_path)
