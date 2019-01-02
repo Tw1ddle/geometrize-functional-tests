@@ -1,5 +1,6 @@
 import glob
 import os
+from os.path import expanduser
 import platform
 import shutil
 import subprocess
@@ -29,14 +30,17 @@ subprocess.call([browser, latest_download_url], shell=False)
 # Delays for 2 minutes, should be plenty of time for the browser to download the application
 time.sleep(120)
 
+# Path to the Chrome downloads directory (assuming this is the right place)
+downloadsDir = os.path.expanduser('~') + '/Downloads'
+
 # Look for the downloaded Geometrize binary, copy it to the app subfolder
-downloadedFiles = os.listdir('/home/travis/Downloads')
+downloadedFiles = os.listdir(downloadsDir)
 
 print("Will print downloaded files...")
 
 print(downloadedFiles)
 
-filteredDownloads = glob.glob('/home/travis/Downloads/geometrize*')
+filteredDownloads = glob.glob(downloadsDir + '/geometrize*')
 
 print(filteredDownloads)
 
