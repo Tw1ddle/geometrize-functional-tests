@@ -28,15 +28,16 @@ if system_name == "Windows":
     print("Running Windows executable")
     subprocess.check_call([binary_path, tests_option])
 elif system_name == "Darwin":
-    print("Mounting Mac .dmg")
-    subprocess.check_call(["hdiutil", "attach", binary_path])
+    mount_point = "/Volumes/Geometrize/"
+    print("Mounting Mac .dmg to " + mount_point)
+    subprocess.check_call(["hdiutil", "attach", "-mountpoint", mount_point, binary_path])
 
     print("Finding Mac .app")
     
     # https://bugreports.qt.io/browse/QTBUG-60324 - dmg structure is the
     # current working directory when the build was done... so we must find the .app file
     matches = []
-    for filepath in glob.iglob('/Volumes/**/Geometrize.app', recursive=True):
+    for filepath in glob.iglob(mount_point + '**/Geometrize.app', recursive=True):
         matches.append(filepath)
 
     print(matches)
