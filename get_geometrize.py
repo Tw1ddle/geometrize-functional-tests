@@ -56,3 +56,5 @@ else:
         shutil.copyfile(source_path, target_path + "/Geometrize.dmg")
     elif system_name == "Linux":
         shutil.copyfile(source_path, target_path + "/Geometrize.AppImage")
+
+print(os.listdir(target_path))
