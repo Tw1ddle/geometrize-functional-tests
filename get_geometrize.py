@@ -9,14 +9,12 @@ systemName = platform.system()
 
 if systemName != "Windows" and systemName != "Mac" and systemName != "Linux":
     raise Exception("Unknown operating system, don't know what application version to download")
-
-systemName = "Linux"
 	
 if systemName != "Linux":
 	raise Exception("This only works on Linux for now, Windows/Mac would work but need additional setup for app installation, extra browser prompts etc")
 	
 # Browser to use, note we do redirects etc based on client side js so can't just use wget
-browser = 'chrome'
+browser = 'google-chrome-stable'
 	
 # Folder structure on download page is windows/mac/linux
 breadcrumb = systemName.lower()
