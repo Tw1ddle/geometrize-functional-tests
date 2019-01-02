@@ -28,7 +28,7 @@ print("Creating browser downloads directory")
 
 homeDir = os.path.expanduser('~')
 
-os.makedirs(homeDir + "/Downloads", exist_ok=True)
+os.makedirs(homeDir + "/Downloads")
 
 print("Will download the application through the web browser")
 
