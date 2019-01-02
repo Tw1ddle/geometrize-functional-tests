@@ -1,14 +1,12 @@
 sudo: required
 dist: trusty
-language: python
-
-python:
-  - "3.6"
+language: generic
 
 # Setup build matrix
 matrix:
   include:
   - os: linux
+    python: "3.6"
   - os: osx
       
 before_script:
