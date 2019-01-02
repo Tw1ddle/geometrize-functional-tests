@@ -32,3 +32,4 @@ latest_binary_url = bucket_url + urllib.parse.quote_plus(breadcrumb + "/" + late
 urllib.request.urlretrieve(latest_binary_url, "app/" + latest_file_name)
 
 print("Finished downloading!")
+

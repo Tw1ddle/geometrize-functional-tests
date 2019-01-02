@@ -1,5 +1,9 @@
 sudo: required
 dist: trusty
+language: python
+
+python:
+  - "3.6"
 
 # Setup build matrix
 matrix:
