@@ -13,12 +13,12 @@ system_name = platform.system()
 if system_name != "Windows" and system_name != "Darwin" and system_name != "Linux":
     raise Exception("Unknown operating system, don't know what app version to download")
 
-# Folder structure has windows/mac/linux at its base
+# Folder structure has windows/osx/linux at its base
 breadcrumb = None
 if system_name == "Windows":
     breadcrumb = "windows"
 elif system_name == "Darwin":
-    breadcrumb = "mac"
+    breadcrumb = "osx"
 elif system_name == "Linux":
     breadcrumb = "linux"
 
