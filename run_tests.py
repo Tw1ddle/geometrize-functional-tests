@@ -28,14 +28,17 @@ if system_name == "Windows":
     subprocess.check_call([binary_path, tests_option])
 elif system_name == "Darwin":
     print("Mounting Mac .dmg")
-    subprocess.check_call(["sudo hdiutil", "attach", binary_path])
+    subprocess.check_call(["hdiutil", "attach", binary_path])
     
-    print("Running Mac executable")
+    print("Running Mac .app")
+	# https://bugreports.qt.io/browse/QTBUG-60324 - dmg structure is the
+	# current working directory when the build was done... so we must find the .app file
+	# TODO
     subprocess.check_call(["/Volumes/Geometrize/Geometrize.app", tests_option])
 elif system_name == "Linux":
     print("Making AppImage executable")
     st = os.stat(binary_path)
     os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
     
-    print("Running the Linux app image")
+    print("Running Linux AppImage")
     subprocess.check_call([binary_path, tests_option])
