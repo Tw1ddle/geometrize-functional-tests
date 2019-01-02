@@ -24,21 +24,26 @@ breadcrumb = systemName.lower()
 breadcrumb_url = 'https://s3.amazonaws.com/geometrize-installer-bucket/index.html?breadcrumb=' + breadcrumb + '%2F'
 latest_download_url = breadcrumb_url + '&dl_latest=true'
 
-# Run browser, expect download to happen
-subprocess.call([browser, latest_download_url], shell=False)
-
-print("Waiting for a few minutes, should be plenty of time for the browser to download the application...")
-
-time.sleep(120)
+print("Creating browser downloads directory")
 
 homeDir = os.path.expanduser('~')
+
+os.makedirs(homeDir + "/Downloads", exist_ok=True)
+
+print("Will download the application through the web browser")
+
+subprocess.call([browser, latest_download_url], shell=False)
+
+print("Waiting for 2 minutes for the web browser download the application...")
+
+time.sleep(120)
 
 print(os.listdir(homeDir))
 
 # Path to the Chrome downloads directory (assuming this is the right place)
 downloadsDir = homeDir + '/Downloads'
 
-# Look for the downloaded Geometrize binary, copy it to the app subfolder
+# Look for the downloaded Geometrize binary
 downloadedFiles = os.listdir(downloadsDir)
 
 print("Will print downloaded files...")
@@ -49,6 +54,11 @@ filteredDownloads = glob.glob(downloadsDir + '/geometrize*')
 
 print(filteredDownloads)
 
+if not filteredDownloads:
+    raise Exception("Failed to find the downloaded application binary")
+
 filePath = os.abspath(filteredDownloads[0])
+
+print("Will copy the app to the testing subfolder")
 
 shutil.copy(os.abspath(filePath), os.path.realpath(__file__) + "/app/Geometrize.AppImage")
