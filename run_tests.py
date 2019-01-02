@@ -10,7 +10,7 @@ binary_name = None
 
 if system_name == "Windows":
     binary_name = "Geometrize.exe"
-elif system_name == "Mac":
+elif system_name == "Darwin":
     binary_name = "Geometrize.dmg"
 elif system_name == "Linux":
     binary_name = "Geometrize.AppImage"
@@ -26,7 +26,7 @@ tests_option = "--functional_tests=" + tests_dir
 if system_name == "Windows":
     print("Running Windows executable")
     subprocess.check_call([binary_path, tests_option])
-elif system_name == "Mac":
+elif system_name == "Darwin":
     print("Mounting Mac .dmg")
     subprocess.check_call(["sudo hdiutil", "attach", binary_path])
     

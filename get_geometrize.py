@@ -10,11 +10,17 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 
 system_name = platform.system()
 
-if system_name != "Windows" and system_name != "Mac" and system_name != "Linux":
+if system_name != "Windows" and system_name != "Darwin" and system_name != "Linux":
     raise Exception("Unknown operating system, don't know what app version to download")
 
 # Folder structure has windows/mac/linux at its base
-breadcrumb = system_name.lower()
+breadcrumb = None
+if system_name == "Windows":
+    breadcrumb = "windows"
+elif system_name == "Darwin":
+    breadcrumb = "mac"
+elif system_name == "Linux":
+    breadcrumb = "linux"
 
 # Default to MSVC builds for Windows
 if breadcrumb == "windows":
@@ -52,7 +58,7 @@ else:
     if not os.path.exists(target_path):
         os.makedirs(target_path)
 
-    if system_name == "Mac":
+    if system_name == "Darwin":
         shutil.copyfile(source_path, target_path + "/Geometrize.dmg")
     elif system_name == "Linux":
         shutil.copyfile(source_path, target_path + "/Geometrize.AppImage")
