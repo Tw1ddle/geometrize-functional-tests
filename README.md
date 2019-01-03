@@ -13,7 +13,7 @@ ChaiScript functional test scripts for [Geometrize](https://www.geometrize.co.uk
  * Install Python 3.x.
  * Run the [get_geometrize](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/get_geometrize.py) script or copy a Geometrize binary to a folder named ``app`` at the root of the repository.
 
-Run the tests by calling run_tests.py, and then examine the results.
+Run the tests by calling [run_tests.py](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/run_tests.py), and then examine the results.
 
 ## Notes
  * Got an idea or suggestion? Open an issue on GitHub, or send Sam a message on [Twitter](https://twitter.com/Sam_Twidale).
