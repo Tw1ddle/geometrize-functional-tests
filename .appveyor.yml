@@ -7,7 +7,6 @@ image:
   - Visual Studio 2019
 
 build_script:
-  - cd %APPVEYOR_BUILD_FOLDER%
   - python
   - ls -a
   # Run the tests, gather results etc
