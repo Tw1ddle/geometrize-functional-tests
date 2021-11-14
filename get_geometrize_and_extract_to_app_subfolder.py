@@ -1,9 +1,33 @@
+# This script downloads the latest Geometrize installer/binaries for each platform
+# It then installs/unpacks the downloads to the /app subfolder
+# Note that to do this on Windows, it runs the Windows installer for Geometrize in unattended mode
+
 import os
 import platform
 import shutil
+import socket
 import subprocess
+import sys
+import time
 import urllib
 import urllib.parse
+import urllib.request
+
+socket.setdefaulttimeout(600) # Downloading shouldn't take this long, idea is to cause a timeout
+
+# Progress callback when downloading the Geometrize installer/executables
+def downloadProgressCb(count, block_size, total_size):
+    global start_time
+    if count == 0:
+        start_time = time.time()
+        return
+    duration = time.time() - start_time
+    progress_size = int(count * block_size)
+    speed = int(progress_size / (1024 * duration))
+    percent = int(count * block_size * 100 / total_size)
+    sys.stdout.write("\r...%d%%, %d MB, %d KB/s, %d seconds passed" %
+                    (percent, progress_size / (1024 * 1024), speed, duration))
+    sys.stdout.flush()
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -33,13 +57,13 @@ latest_tag_url = bucket_url + breadcrumb + "/__latest"
 print("Searching for file containing name of build to test with at: " + latest_tag_url)
 
 latest_url_file_name = '__latest'
-urllib.urlretrieve(latest_tag_url, latest_url_file_name)
+urllib.request.urlretrieve(latest_tag_url, latest_url_file_name)
 binary_file_name = open(latest_url_file_name ,"r").read().strip()
 
 print("Latest file is named " + binary_file_name + " - will download to repo root")
 
 latest_binary_url = bucket_url + urllib.parse.quote_plus(breadcrumb + "/" + binary_file_name)
-urllib.urlretrieve(latest_binary_url, binary_file_name)
+urllib.request.urlretrieve(latest_binary_url, binary_file_name, downloadProgressCb)
 
 print("Finished downloading!")
 
