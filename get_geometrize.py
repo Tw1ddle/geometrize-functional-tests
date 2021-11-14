@@ -3,8 +3,6 @@ import platform
 import shutil
 import subprocess
 import urllib
-import urllib.request
-import urllib.parse
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -34,13 +32,13 @@ latest_tag_url = bucket_url + breadcrumb + "/__latest"
 print("Searching for file containing name of build to test with at: " + latest_tag_url)
 
 latest_url_file_name = '__latest'
-urllib.request.urlretrieve(latest_tag_url, latest_url_file_name)
+urllib.urlretrieve(latest_tag_url, latest_url_file_name)
 binary_file_name = open(latest_url_file_name ,"r").read().strip()
 
 print("Latest file is named " + binary_file_name + " - will download to repo root")
 
 latest_binary_url = bucket_url + urllib.parse.quote_plus(breadcrumb + "/" + binary_file_name)
-urllib.request.urlretrieve(latest_binary_url, binary_file_name)
+urllib.urlretrieve(latest_binary_url, binary_file_name)
 
 print("Finished downloading!")
 
