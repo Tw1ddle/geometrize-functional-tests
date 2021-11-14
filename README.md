@@ -1,6 +1,6 @@
 [![Geometrize Functional tests logo](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/screenshots/logo.png?raw=true "Geometrize - geometrizing images into geometric primitives functional tests logo")](https://www.geometrize.co.uk/)
 
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/LICENSE)
+[![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/LICENSE)
 [![AppVeyor Functional Tests Build Status](https://ci.appveyor.com/api/projects/status/rsi1531sorenagk6?svg=true)](https://ci.appveyor.com/project/Tw1ddle/geometrize-functional-tests)
 
 ChaiScript functional test scripts for [Geometrize](https://www.geometrize.co.uk/), an app for geometrizing images into geometric primitives. Continuous testing is performed via CI platforms to run the test scripts.
@@ -9,8 +9,8 @@ ChaiScript functional test scripts for [Geometrize](https://www.geometrize.co.uk
 
 ## Usage
 
- * Install Python 3.x.
- * Run the [get_geometrize](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/get_geometrize.py) script or copy a Geometrize binary to a folder named ``app`` at the root of the repository.
+ * Install Python 3.9+.
+ * Run the [script to fetch and install Geometrize](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/get_geometrize_and_extract_to_app_subfolder.py) or copy a Geometrize binary to the ``app`` subfolder at the root of the repository.
 
 Run the tests by calling [run_tests.py](https://github.com/Tw1ddle/geometrize-functional-tests/blob/master/run_tests.py), and then examine the results.
 

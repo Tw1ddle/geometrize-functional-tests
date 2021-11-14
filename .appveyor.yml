@@ -7,6 +7,6 @@ build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
   - ls -a
   # Run the tests, gather results etc
-  - python get_geometrize.py
+  - python get_geometrize_and_extract_to_app_subfolder.py
   - python run_tests.py
   - python report_result.py
