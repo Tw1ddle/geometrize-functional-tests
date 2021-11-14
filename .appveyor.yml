@@ -5,9 +5,14 @@ image:
   - Ubuntu2004
   - macos-bigsur
   - Visual Studio 2019
+ 
+environment:
+    matrix:
+      - PYTHON_DIR: "C:\Python310"
 
 build_script:
-  - python --version 
+  - python --version
+  - cmd: set PATH=%PYTHON_DIR%;%PYTHON_DIR%\\Scripts;%PATH% # Try to specify python version on Windows (it ignores the "stack" command)
   - ls -a
   # Run the tests, gather results etc
   - python get_geometrize_and_extract_to_app_subfolder.py
