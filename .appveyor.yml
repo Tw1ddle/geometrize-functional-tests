@@ -1,7 +1,10 @@
-stack: python 3.10
+stack: python 3.9
 
-configuration:
-  - release
+# Note that builds run in the order the images are declared
+image:
+  - Ubuntu2004
+  - macos-bigsur
+  - Visual Studio 2019
 
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
