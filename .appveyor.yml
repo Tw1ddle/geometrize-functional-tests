@@ -1,10 +1,11 @@
-stack: python 3.9
+stack: python 3.10
 
 configuration:
   - release
 
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
+  - python
   - ls -a
   # Run the tests, gather results etc
   - python get_geometrize_and_extract_to_app_subfolder.py
