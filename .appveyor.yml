@@ -8,11 +8,11 @@ image:
  
 environment:
     matrix:
-      - PYTHON_DIR: "C:\Python310"
+      - PYTHON_DIR: "C:\\Python310"
 
 build_script:
-  - python --version
   - cmd: set PATH=%PYTHON_DIR%;%PYTHON_DIR%\\Scripts;%PATH% # Try to specify python version on Windows (it ignores the "stack" command)
+  - python --version
   - ls -a
   # Run the tests, gather results etc
   - python get_geometrize_and_extract_to_app_subfolder.py
