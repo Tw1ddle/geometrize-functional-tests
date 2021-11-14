@@ -1,6 +1,6 @@
 function Controller() {
     // Note could auto-reject/accept message boxes here , don't expect to see any though so we won't...
-	//installer.autoRejectMessageBoxes()
+    //installer.autoRejectMessageBoxes()
 
     installer.installationFinished.connect(function() {
         gui.clickButton(buttons.NextButton);
@@ -50,9 +50,9 @@ Controller.prototype.ReadyForInstallationPageCallback = function() {
 }
 
 Controller.prototype.FinishedPageCallback = function() {
-	var checkBoxForm = gui.currentPageWidget().LaunchAppCheckBoxForm;
-	if (checkBoxForm && checkBoxForm.launchAppCheckBox) {
-		checkBoxForm.launchAppCheckBox.checked = false;
-	}
+    var checkBoxForm = gui.currentPageWidget().LaunchAppCheckBoxForm;
+    if (checkBoxForm && checkBoxForm.launchAppCheckBox) {
+        checkBoxForm.launchAppCheckBox.checked = false;
+    }
     gui.clickButton(buttons.FinishButton);
 }

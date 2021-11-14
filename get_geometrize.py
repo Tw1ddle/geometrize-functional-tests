@@ -24,7 +24,7 @@ elif system_name == "Linux":
 
 # Default to MSVC builds for Windows
 if breadcrumb == "windows":
-    breadcrumb = "windows/msvc2015_64"
+    breadcrumb = "windows/msvc2019_64"
 
 bucket_url = 'https://geometrize-installer-bucket.s3.amazonaws.com/'
 
