@@ -7,7 +7,7 @@ image:
   - Visual Studio 2019
 
 build_script:
-  - python
+  - python --version 
   - ls -a
   # Run the tests, gather results etc
   - python get_geometrize_and_extract_to_app_subfolder.py
