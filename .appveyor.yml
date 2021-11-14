@@ -1,15 +1,11 @@
+stack: python 3.9
+
 configuration:
   - release
 
-environment:
-  matrix:
-    - PYTHON: "C:\\Python36-x64"
-
-init:
-- cmd: set PATH=%PYTHON%;%PATH%
-
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
+  - ls -a
   # Run the tests, gather results etc
   - python get_geometrize.py
   - python run_tests.py
