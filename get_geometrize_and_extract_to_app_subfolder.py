@@ -58,7 +58,7 @@ if breadcrumb == "windows":
 # URL for file containing the name of the latest binary, which we ought to download and test with
 latest_tag_url = download_bucket_url + breadcrumb + "/__latest"
 
-print("Searching for file containing name of build to test with at: " + latest_tag_url)
+print("Searching for file containing name of build to test with at: " + latest_tag_url, flush=True) 
 
 latest_url_file_name = '__latest'
 urllib.request.urlretrieve(latest_tag_url, latest_url_file_name)
@@ -69,7 +69,7 @@ print("Latest file is named " + binary_file_name + " - will download to repo roo
 latest_binary_url = download_bucket_url + urllib.parse.quote_plus(breadcrumb + "/" + binary_file_name)
 urllib.request.urlretrieve(latest_binary_url, binary_file_name, downloadProgressCb)
 
-print("\n\nFinished downloading!\n\n")
+print("\n\nFinished downloading!\n\n", flush=True) 
 
 source_path = repo_root_dir + "/" + binary_file_name
 target_path = repo_root_dir + "/app"
@@ -77,27 +77,31 @@ target_path = repo_root_dir + "/app"
 # Unpack/install binary to "app" folder, same place for all platforms for symmetry
 if system_name == "Windows":
     # Try uninstalling an existing installation first (to avoid gumming up the add/remove programs list when running locally)
-    maintenance_tool_path = repo_root_dir + "/app/" + "maintenancetool.exe"
+    maintenance_tool_path = target_path + "/" + "maintenancetool.exe"
     if os.path.isfile(maintenance_tool_path):
-        print("Trying to silently uninstall a pre-existing installation from the app/ subfolder")
+        print("Trying to silently uninstall a pre-existing installation from the app/ subfolder\n\n", flush=True) 
         unattended_uninstaller_script_path = repo_root_dir + "/windows_unattended_uninstaller_script.qs"
         try:
             subprocess.check_call([maintenance_tool_path, '--script', unattended_uninstaller_script_path])
+            # Wait for the target directory to disappear, since the installer shouldn't be running
+            while True:
+                time.sleep(2)
+                print("Waiting for a pre-existing app installation to be removed...\n", flush=True) 
+                if not os.path.isdir(target_path): 
+                    break
         except subprocess.CalledProcessError:
             pass # Error from the called uninstaller
         except OSError:
             pass # Executable not found
-
-        print("Waiting a few seconds for filesystem to settle...\n\n")
-        time.sleep(3) # Delay to avoid any filesystem-related timing issues
     else:
-        print("Looks like there is no pre-existing installation, will go straight to installing")
+        print("Looks like there is no pre-existing Geometrize installation, will go straight to installing\n\n", flush=True) 
 
     # Create the /app folder
     if not os.path.exists(target_path):
         os.makedirs(target_path)
 
-    print("Installing app to app folder in unattended mode")
+    # Try installing the app silently
+    print("Installing app in unattended mode")
     unattended_installer_script_path = repo_root_dir + "/windows_unattended_installer_script.qs"
     try:
         subprocess.check_call([source_path, '--script', unattended_installer_script_path])
@@ -105,6 +109,9 @@ if system_name == "Windows":
         pass # Error from the called installer
     except OSError:
         pass # Executable not found
+    
+    print("\n\nWaiting a while for the installer to finish running (as it runs asynchronously...)\n\n", flush=True)
+    time.sleep(10)
 else:
     # Remove and then recreate the /app destination folder
     if os.path.exists(target_path):
@@ -120,8 +127,5 @@ else:
     elif system_name == "Linux":
         shutil.copyfile(source_path, target_path + "/Geometrize.AppImage")
 
-print("Waiting few seconds for filesystem to settle...\n\n")
-time.sleep(3) # Delay to avoid any filesystem-related timing issues
-
-print("Listing resulting app directory after binary placement/installer unpacking\n\n")
-print(os.listdir(target_path))
+print("Listing resulting app installation directory after waiting for any installer/file copying to finish\n\n", flush=True)
+print(os.listdir(target_path), flush=True)

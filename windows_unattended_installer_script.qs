@@ -8,6 +8,16 @@ function Controller() {
     //installer.autoRejectMessageBoxes()
 
     installer.installationFinished.connect(function() {
+        // Run the executable after installation completes
+        //try {
+        //    var targetDir = installer.value("TargetDir");
+        //   if (installer.isInstaller() && installer.status == QInstaller.Success) {
+        //        installer.executeDetached(targetDir + "/Geometrize.exe"); // TODO - run this via the self-tests, potentially a python script instead
+        //    }
+        //} catch(e) {
+        //     print(e);
+        //}
+
         gui.clickButton(buttons.NextButton);
     })
 }
