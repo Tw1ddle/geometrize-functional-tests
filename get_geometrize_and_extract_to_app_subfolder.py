@@ -70,7 +70,7 @@ print("Latest file is named " + binary_file_name + " - will download to repo roo
 latest_binary_url = bucket_url + urllib.parse.quote_plus(breadcrumb + "/" + binary_file_name)
 urllib.request.urlretrieve(latest_binary_url, binary_file_name, downloadProgressCb)
 
-print("Finished downloading!")
+print("\n\nFinished downloading!\n\n")
 
 source_path = script_dir + "/" + binary_file_name
 target_path = script_dir + "/app"

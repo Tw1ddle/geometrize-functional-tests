@@ -1,6 +1,9 @@
 // Note: you can list members of a widget with a line like "console.log(Object.getOwnPropertyNames(widget))"
 
 function Controller() {
+    // Set installer target directory to the app subfolder for testing
+    installer.setValue("TargetDir", (installer.value("InstallerDirPath") + "/app"));
+
     // Note could auto-reject/accept message boxes here , don't expect to see any though so we won't...
     //installer.autoRejectMessageBoxes()
 
@@ -21,8 +24,6 @@ Controller.prototype.IntroductionPageCallback = function() {
 
 // Installation Folder -> Next
 Controller.prototype.TargetDirectoryPageCallback = function() {
-    gui.currentPageWidget().TargetDirectoryLineEdit.setText(installer.value("InstallerDirPath") + "/app");
-
     gui.clickButton(buttons.NextButton);
 }
 
@@ -40,7 +41,7 @@ Controller.prototype.StartMenuDirectoryPageCallback = function() {
     gui.clickButton(buttons.NextButton);
 }
 
-// License -> Agree -> Next
+// License -> Select "I accept the license" checkbox -> Next
 Controller.prototype.LicenseAgreementPageCallback = function() {
     gui.currentPageWidget().widget.AcceptLicenseRadioCheckBox.checked = true;
     gui.clickButton(buttons.NextButton);
