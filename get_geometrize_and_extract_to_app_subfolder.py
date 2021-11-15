@@ -15,6 +15,7 @@ import urllib.request
 
 socket.setdefaulttimeout(600) # Downloading shouldn't take this long, idea is to cause a timeout
 
+# Helper for preventing divide by zero in download progress callback
 def safe_divide(x, y):
     if y == 0:
         return 0
@@ -74,6 +75,14 @@ print("Finished downloading!")
 source_path = script_dir + "/" + binary_file_name
 target_path = script_dir + "/app"
 
+# Remove and then recreate the /app destination folder, initially
+if os.path.exists(target_path):
+    shutil.rmtree(target_path)
+
+# Create the app folder
+if not os.path.exists(target_path):
+    os.makedirs(target_path)
+
 # Unpack/install binary to "app" folder, same place for all platforms for symmetry
 if system_name == "Windows":
     print("Installing app to app folder in unattended mode")
@@ -81,9 +90,6 @@ if system_name == "Windows":
     subprocess.check_call([source_path, '--script', unattended_installer_path])
 else:
     print("Copying app from " + source_path + " to " + target_path)
-
-    if not os.path.exists(target_path):
-        os.makedirs(target_path)
 
     if system_name == "Darwin":
         shutil.copyfile(source_path, target_path + "/Geometrize.dmg")

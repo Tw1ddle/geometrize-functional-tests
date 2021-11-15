@@ -1,3 +1,5 @@
+// Note: you can list members of a widget with a line like "console.log(Object.getOwnPropertyNames(widget))"
+
 function Controller() {
     // Note could auto-reject/accept message boxes here , don't expect to see any though so we won't...
     //installer.autoRejectMessageBoxes()
@@ -40,7 +42,7 @@ Controller.prototype.StartMenuDirectoryPageCallback = function() {
 
 // License -> Agree -> Next
 Controller.prototype.LicenseAgreementPageCallback = function() {
-    gui.currentPageWidget().AcceptLicenseRadioButton.setChecked(true);
+    gui.currentPageWidget().widget.AcceptLicenseRadioCheckBox.checked = true;
     gui.clickButton(buttons.NextButton);
 }
 
