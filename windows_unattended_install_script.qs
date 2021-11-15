@@ -43,7 +43,7 @@ Controller.prototype.StartMenuDirectoryPageCallback = function() {
 
 // License -> Select "I accept the license" checkbox -> Next
 Controller.prototype.LicenseAgreementPageCallback = function() {
-    gui.currentPageWidget().widget.AcceptLicenseRadioCheckBox.checked = true;
+    gui.currentPageWidget().AcceptLicenseCheckBox.setChecked(true)
     gui.clickButton(buttons.NextButton);
 }
 
