@@ -1,0 +1,3 @@
+printToAllScriptConsoleWidgets("Running script named: " + scriptPath);
+
+printToAllScriptConsoleWidgets("Simple test, printing a string to the console");
