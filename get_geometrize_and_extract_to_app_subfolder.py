@@ -15,7 +15,7 @@ import urllib.request
 
 socket.setdefaulttimeout(600) # Downloading shouldn't take this long, idea is to cause a timeout
 download_bucket_url = 'https://geometrize-installer-bucket.s3.amazonaws.com/' # Where to get the installers from
-default_windows_breadcrumb = "windows/msvc2019_64" # Default to MSVC builds for Windows downloads
+default_windows_breadcrumb = "windows/msvc_windows" # Default to MSVC builds for Windows downloads
 
 # Helper for preventing divide by zero in download progress callback
 def safe_divide(x, y):
