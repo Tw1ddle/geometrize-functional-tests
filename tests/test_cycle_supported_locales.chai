@@ -1,0 +1,13 @@
+printToAllScriptConsoleWidgets("Will cycle through all supported locales");
+
+var supportedLocales = getSupportedLocaleCodes();
+
+for(locale : supportedLocales)
+{
+    printToAllScriptConsoleWidgets("Will switch to locale: " + locale);
+    setLocaleAndUserInterfaceLanguage(locale);
+    processApplicationEvents();
+    printToAllScriptConsoleWidgets("Did switch to locale: " + locale);
+}
+
+setLocaleAndUserInterfaceLanguage("en"); // Switch back to English in the end
