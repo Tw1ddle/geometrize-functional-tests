@@ -17,3 +17,4 @@ build_script:
   # Run the tests, gather results etc
   - python get_geometrize_and_extract_to_app_subfolder.py
   - python run_tests.py
+  - python check_test_results.py
