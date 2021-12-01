@@ -6,6 +6,10 @@ printToAllScriptConsoleWidgets("Will walk user interface");
 // Helper to save widget screengrab
 def grab(w, name)
 {
+    // TODO recursively create directory if needed
+    // TODO prepend geometrize version
+    // TODO put the locale in the directory path
+
     var imagePath = screengrabResultsDirectory + "/" + name + ".png";
     printToAllScriptConsoleWidgets("Saving image to: " + imagePath);
     saveWidgetScreenshot(imagePath, w);
@@ -21,11 +25,33 @@ def grabAll(w, name)
         processApplicationEvents();
         printToAllScriptConsoleWidgets("Did switch to locale: " + locale);
         sleep(500);
-        grab(w, name + "_" + locale);
+        grab(w, name + "/" + locale);
     }
 }
 
 // Initially assume the application has just launched
 grabAll(getLaunchWindows()[0], "launch_window");
+
+// TODO launch window open image, download webpage, task queue dialogs
+
+// TODO launch window file menu, view menu, help menu
+
+// TODO about dialog
+
+// TODO credits dialog
+
+// TODO preferences dialogs: display, general, loading/saving, language and performance sections
+
+// TODO global settings load, save dialogs
+
+// TODO image task dialog with exporter tab, task settings tab, scripting tabs shown
+
+// TODO image task exporter dialogs: save HTML5, WebGL, geometry data, image, images, SVG
+
+// TODO image task file menu, view menu
+
+// TODO license dialog
+
+// TODO script editor dialog
 
 printToAllScriptConsoleWidgets("Did walk user interface");
