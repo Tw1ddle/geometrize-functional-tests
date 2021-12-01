@@ -1,0 +1,31 @@
+// This script navigates through the entire Geometrize user interface
+// It saves screenshots of widgets in every supported language as it goes
+
+printToAllScriptConsoleWidgets("Will walk user interface");
+
+// Helper to save widget screengrab
+def grab(w, name)
+{
+    var imagePath = screengrabResultsDirectory + "/" + name + ".png";
+    printToAllScriptConsoleWidgets("Saving image to: " + imagePath);
+    saveWidgetScreenshot(imagePath, w);
+}
+
+// Helper to save widget screengrab in every supported language
+def grabAll(w, name)
+{
+    var supportedLocales = getSupportedLocaleCodes();
+    for(locale : supportedLocales)
+    {
+        setLocaleAndUserInterfaceLanguage(locale);
+        processApplicationEvents();
+        printToAllScriptConsoleWidgets("Did switch to locale: " + locale);
+        sleep(500);
+        grab(w, name + "_" + locale);
+    }
+}
+
+// Initially assume the application has just launched
+grabAll(getLaunchWindows()[0], "launch_window");
+
+printToAllScriptConsoleWidgets("Did walk user interface");
